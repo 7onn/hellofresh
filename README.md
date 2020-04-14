@@ -7,8 +7,8 @@ Hello and thanks for taking the time to try this out.
 The goal of this test is to assert (to some degree) your coding, testing, automation and documentation skills. You're given a simple problem, so you can focus on showcasing your techniques.
 
 ## Problem definition
-
 The test aims to create a simple HTTP service that provides observability aspects, (e.g) you can store and returns random values, collect metrics from operations, add logs and tracing for requests.  
+
 Since we love automating things, the service should be automatically deployed to Kubernetes.
 
 _Note: While we love open source here at HelloFresh, please do not create a public repo with your test in! This challenge is only shared with people interviewing, and for obvious reasons, we'd like it to remain this way._
@@ -53,12 +53,28 @@ The application **MUST** fail if the environment variable is not defined.
 The application **MUST** be deployable on a Kubernetes cluster. Please provide manifest files and a script that deploys the application on a Minikube cluster.
 The application **MUST** be accessible from outside the Minikube cluster.
 
+
+### Metrics expectation
+
+We love see as much as indicators you can expose from the application, but please don't forget those metrics as we love see below
+- Total incoming requests which are counted under 200. Similarly for 404 and 500
+- Uptime of service which is rotated after every deploment time
+
+### Logging expectation
+
+- Ideally the HTTP status codes can be filtered from HTTP access logs
+- For those manipulation requests like PUT/POST please give as an clear reason whether they are processed or not
+- Would be perfect if each requests can has REQUEST ID in log format and searchable
+
+We currently dealing with JSON Log format everyday but feel free to choose the one your most familiar
+
+### Tracing expectation
+
 ## Rules
 
 -  Applicants for SRE roles are requested to use either Python or GoLang.
 - You **SHOULD** write testable code and demonstrate unit testing it.
 - You can use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run.
 - You **SHOULD** document your code and scripts.
-- YOU **MUST** have metrics exposed to Prometheus. 
-- YOU **MUST** have structured logs (JSON format). 
-- YOU **MUST** instrument your code, publishing distributed tracing to Jaeger. 
+- YOU **MUST** have metrics exposed to Prometheus. (Please don't use MUST here. I think we can ask them feel free to use any indicator format)
+- YOU **MUST** instrument your code, publishing distributed tracing to Jaeger. (Similarly with Prometheus expose, and not MUST)
