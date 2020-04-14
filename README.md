@@ -57,14 +57,14 @@ The application **MUST** be accessible from outside the Minikube cluster.
 ### Metrics expectation
 
 We love see as much as indicators you can expose from the application, but please don't forget those metrics as we love see below
-- Total incoming requests which are counted under 200. Similarly for 404 and 500
-- Uptime of service which is rotated after every deploment time
+- Total incoming requests which are counted under 200. Similarly for 400 - 404 and 500
+- Uptime of service which is rotated after every deployment time
 
 ### Logging expectation
 
 - Ideally the HTTP status codes can be filtered from HTTP access logs
-- For those manipulation requests like PUT/POST please give as an clear reason whether they are processed or not
-- Would be perfect if each requests can has REQUEST ID in log format and searchable
+- For those manipulation requests like PUT/POST please give us a proper reason whether they are processed or not
+- Would be perfect if each requests can has REQUEST ID in log-format and searchable
 
 We currently dealing with JSON Log format everyday but feel free to choose the one your most familiar
 
