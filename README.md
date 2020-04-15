@@ -9,7 +9,7 @@ The goal of this test is to assert (to some degree) your coding, testing, automa
 ## Problem definition
 The test aims to create a simple HTTP service that provides observability aspects, (e.g) you can store and returns random values, collect metrics from operations, add logs and tracing for requests.  
 
-Since we love automating things, the service should be automatically deployed to Kubernetes.
+Since we love automating things; the service should be automatically deployed to Kubernetes.
 
 _Note: While we love open source here at HelloFresh, please do not create a public repo with your test in! This challenge is only shared with people interviewing, and for obvious reasons, we'd like it to remain this way._
 
