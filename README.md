@@ -43,7 +43,7 @@ The application **MUST** be accessible from outside the Minikube cluster.
 
 - Your application **MUST** expose metrics in Prometheus format. 
 - Your application **MUST** print structured logs in JSON format to stdout. 
-- Your application **MUST** publish distributed tracing data in Zipkin format. 
+- Your application **MUST** publish distributed tracing data in Zipkin or Jaeger format. 
 - You **SHOULD** write testable code and demonstrate unit testing it.
 - You **SHOULD** document your code and scripts.
 - You **MAY** use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run.
