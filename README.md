@@ -8,7 +8,7 @@ The goal of this test is to assess (to some degree) your coding, testing, automa
 
 ## Problem definition
 
-The test aims to create a simple HTTP API service using the language of your choice (we prefer Python or GoLang) that provides observability aspects, (e.g) you can write a CRUD service, collect metrics from operations, add logs and tracing for HTTP requests.
+The test aims to create a simple HTTP API service using the language of your choice (we prefer Python or GoLang) that provides observability aspects, collect metrics from operations, add logs and tracing for HTTP requests.
 
 Since we love automating things; the service should be automatically deployed to Kubernetes.
 
