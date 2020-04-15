@@ -8,7 +8,7 @@ The goal of this test is to assert (to some degree) your coding, testing, automa
 
 ## Problem definition
 
-The test aims to create a simple HTTP service that provides observability aspects, (e.g) you can store and returns random values, collect metrics from operations, add logs and tracing for requests.  
+The test aims to create a simple HTTP API service using the language of your choice (we prefer Python or GoLang) that provides observability aspects, (e.g) you can write a CRUD service, collect metrics from operations, add logs and tracing for HTTP requests.
 Since we love automating things, the service should be automatically deployed to Kubernetes.
 
 _Note: While we love open source here at HelloFresh, please do not create a public repo with your test in! This challenge is only shared with people interviewing, and for obvious reasons, we'd like it to remain this way._
@@ -27,21 +27,7 @@ this gives you as well as us a better understanding of what working together mig
 
 We believe it will take 4 to 8 hours to develop this task, however, feel free to invest as much time as you want.
 
-### Endpoints
-
-Your application **MUST** conforms to the following endpoint structure and returns the HTTP status codes appropriate to each operation.
-
-Following are the endpoints that should be implemented:
-
-| Name   | Method      | URL
-| ---    | ---         | ---
-| List   | `GET`       | `/configs`
-| Create | `POST`      | `/configs`
-| Get    | `GET`       | `/configs/{name}`
-| Collect| `GET`       | `/metrics`
-| Update | `PUT/PATCH` | `/configs/{name}`
-| Delete | `DELETE`    | `/configs/{name}`
-
+## Requirements
 
 ### Configuration
 
@@ -53,12 +39,13 @@ The application **MUST** fail if the environment variable is not defined.
 The application **MUST** be deployable on a Kubernetes cluster. Please provide manifest files and a script that deploys the application on a Minikube cluster.
 The application **MUST** be accessible from outside the Minikube cluster.
 
-## Rules
+### Instrumentation
 
--  Applicants for SRE roles are requested to use either Python or GoLang.
+- Your application **MUST** expose metrics in Prometheus format. 
+- Your application **MUST** print structured logs in JSON format to stdout. 
+- Your application **MUST** publish distributed tracing data in Zipkin or Jaeger format. 
 - You **SHOULD** write testable code and demonstrate unit testing it.
-- You can use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run.
 - You **SHOULD** document your code and scripts.
-- YOU **MUST** have metrics exposed to Prometheus. 
-- YOU **MUST** have structured logs (JSON format). 
-- YOU **MUST** instrument your code, publishing distributed tracing to Jaeger. 
+- You **MAY** use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run.
+
+
