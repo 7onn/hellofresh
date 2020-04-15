@@ -7,7 +7,8 @@ Hello and thanks for taking the time to try this out.
 The goal of this test is to assert (to some degree) your coding, testing, automation and documentation skills. You're given a simple problem, so you can focus on showcasing your techniques.
 
 ## Problem definition
-The test aims to create a simple HTTP service that provides observability aspects, (e.g) you can store and returns random values, collect metrics from operations, add logs and tracing for requests.  
+
+The test aims to create a simple HTTP API service using the language of your choice (we prefer Python or GoLang) that provides observability aspects, (e.g) you can write a CRUD service, collect metrics from operations, add logs and tracing for HTTP requests.
 
 Since we love automating things, the service should be automatically deployed to Kubernetes.
 
@@ -27,32 +28,17 @@ this gives you as well as us a better understanding of what working together mig
 
 We believe it will take 4 to 8 hours to develop this task, however, feel free to invest as much time as you want.
 
-### Endpoints
-
-Your application **MUST** conforms to the following endpoint structure and returns the HTTP status codes appropriate to each operation.
-
-Following are the endpoints that should be implemented:
-
-| Name   | Method      | URL
-| ---    | ---         | ---
-| List   | `GET`       | `/configs`
-| Create | `POST`      | `/configs`
-| Get    | `GET`       | `/configs/{name}`
-| Collect| `GET`       | `/metrics`
-| Update | `PUT/PATCH` | `/configs/{name}`
-| Delete | `DELETE`    | `/configs/{name}`
-
+## Requirements
 
 ### Configuration
 
-Your application **MUST** serve the API on the port defined by the environment variable `SERVE_PORT`.
-The application **MUST** fail if the environment variable is not defined.
+- Your application **MUST** serve the API on the port defined by the environment variable `SERVE_PORT`.
+- The application **MUST** fail if the environment variable is not defined.
 
 ### Deployment
 
-The application **MUST** be deployable on a Kubernetes cluster. Please provide manifest files and a script that deploys the application on a Minikube cluster.
-The application **MUST** be accessible from outside the Minikube cluster.
-
+- The application **MUST** be deployable on a Kubernetes cluster. Please provide manifest files and a script that deploys the application on a Minikube cluster.
+- The application **MUST** be accessible from outside the Minikube cluster.
 
 ### Metrics expectation
 
@@ -64,17 +50,18 @@ We love see as much as indicators you can expose from the application, but pleas
 
 - Ideally the HTTP status codes can be filtered from HTTP access logs
 - For those manipulation requests like PUT/POST please give us a proper reason whether they are processed or not
-- Would be perfect if each requests can has REQUEST ID in log-format and searchable
+- Would be perfect if REQUEST ID field is appeared and searchable
 
-We currently dealing with JSON Log format everyday but feel free to choose the one your most familiar
+We currently dealing with JSON Log format everyday but feel free to choose the one you are most familiar with
 
 ### Tracing expectation
 
 ## Rules
+=======
+### Instrumentation
 
--  Applicants for SRE roles are requested to use either Python or GoLang.
+- Your application **MUST** expose metrics in Prometheus format. 
+- Your application **MUST** print structured logs in JSON format to stdout. 
+- Your application **MUST** publish distributed tracing data in Zipkin or Jaeger format. 
 - You **SHOULD** write testable code and demonstrate unit testing it.
-- You can use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run.
 - You **SHOULD** document your code and scripts.
-- YOU **MUST** have metrics exposed to Prometheus. (Please don't use MUST here. I think we can ask them feel free to use any indicator format)
-- YOU **MUST** instrument your code, publishing distributed tracing to Jaeger. (Similarly with Prometheus expose, and not MUST)
