@@ -8,7 +8,7 @@ The goal of this test is to assess (to some degree) your coding, testing, automa
 
 ## Problem definition
 
-The test aims to create a simple HTTP API service using the language of your choice (we prefer Python or GoLang) that provides observability aspects, (e.g) you can write a CRUD service, collect metrics from operations, add logs and tracing for HTTP requests.
+The test aims to create a simple HTTP API service using the language of your choice (we prefer Python or GoLang) that provides observability aspects, collect metrics from operations, add logs and tracing for HTTP requests.
 
 Since we love automating things; the service should be automatically deployed to Kubernetes.
 
@@ -29,6 +29,105 @@ this gives you as well as us a better understanding of what working together mig
 We believe it will take 4 to 8 hours to develop this task, however, feel free to invest as much time as you want.
 
 ## Requirements
+
+### Endpoints
+
+Your application **MUST** conform to the following endpoint structure and return the HTTP status codes appropriate to each operation.
+
+Following are the endpoints that should be implemented:
+
+| Name   | Method      | URL
+| ---    | ---         | ---
+| List   | `GET`       | `/configs`
+| Create | `POST`      | `/configs`
+| Get    | `GET`       | `/configs/{name}`
+| Update | `PUT/PATCH` | `/configs/{name}`
+| Delete | `DELETE`    | `/configs/{name}`
+
+#### List
+
+The list endpoint **MUST** return all configs.
+
+List example-1:
+
+```sh
+curl http://config-service/configs
+```
+
+Response example:
+
+```json
+[
+  {
+    "name": "datacenter-1",
+    "metadata": {
+      "monitoring": {
+        "enabled": "true"
+      },
+      "limits": {
+        "cpu": {
+          "enabled": "false",
+          "value": "300m"
+        }
+      }
+    }
+  },
+  {
+    "name": "datacenter-2",
+    "metadata": {
+      "monitoring": {
+        "enabled": "true"
+      },
+      "limits": {
+        "cpu": {
+          "enabled": "true",
+          "value": "250m"
+        }
+      }
+    }
+  },
+]
+```
+
+
+Get example:
+
+```sh
+curl http://config-service/configs/burger-nutrition
+```
+
+Response example:
+
+```json
+[
+  {
+    "name": "burger-nutrition",
+    "metadata": {
+      "calories": 230,
+      "fats": {
+        "saturated-fat": "0g",
+        "trans-fat": "1g"
+      },
+      "carbohydrates": {
+          "dietary-fiber": "4g",
+          "sugars": "1g"
+      },
+      "allergens": {
+        "nuts": "false",
+        "seafood": "false",
+        "eggs": "true"
+      }
+    }
+  }
+]
+```
+
+#### Schema
+
+- **Config**
+  - Name (string)
+  - Metadata (nested key:value pairs where both key and value are strings of arbitrary length)
+
 
 ### Configuration
 
@@ -59,9 +158,10 @@ We currently dealing with JSON Log format everyday but feel free to choose the o
 ## Rules
 ### Instrumentation
 
-- Your application **MUST** expose metrics in Prometheus format. 
-- Your application **MUST** print structured logs in JSON format to stdout. 
-- Your application **MUST** publish distributed tracing data in Zipkin or Jaeger format. 
+- Your application **MUST** expose metrics in Prometheus format.
+- Your application **MUST** print structured logs in JSON format to stdout.
+- Your application **MUST** publish distributed tracing data in Zipkin or Jaeger format.
 - You **SHOULD** write testable code and demonstrate unit testing it.
 - You **SHOULD** document your code and scripts.
-- You **MAY** use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run 
+- You **MAY** use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run.
+
