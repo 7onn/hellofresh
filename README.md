@@ -4,12 +4,13 @@
 
 Hello and thanks for taking the time to try this out.
 
-The goal of this test is to assert (to some degree) your coding, testing, automation and documentation skills. You're given a simple problem, so you can focus on showcasing your techniques.
+The goal of this test is to assess (to some degree) your coding, testing, automation, and documentation skills. You're given a simple problem, so you can focus on showcasing your techniques.
 
 ## Problem definition
 
 The test aims to create a simple HTTP API service using the language of your choice (we prefer Python or GoLang) that provides observability aspects, (e.g) you can write a CRUD service, collect metrics from operations, add logs and tracing for HTTP requests.
-Since we love automating things, the service should be automatically deployed to Kubernetes.
+
+Since we love automating things; the service should be automatically deployed to Kubernetes.
 
 _Note: While we love open source here at HelloFresh, please do not create a public repo with your test in! This challenge is only shared with people interviewing, and for obvious reasons, we'd like it to remain this way._
 
@@ -31,14 +32,31 @@ We believe it will take 4 to 8 hours to develop this task, however, feel free to
 
 ### Configuration
 
-Your application **MUST** serve the API on the port defined by the environment variable `SERVE_PORT`.
-The application **MUST** fail if the environment variable is not defined.
+- Your application **MUST** serve the API on the port defined by the environment variable `SERVE_PORT`.
+- The application **MUST** fail if the environment variable is not defined.
 
 ### Deployment
 
-The application **MUST** be deployable on a Kubernetes cluster. Please provide manifest files and a script that deploys the application on a Minikube cluster.
-The application **MUST** be accessible from outside the Minikube cluster.
+- The application **MUST** be deployable on a Kubernetes cluster. Please provide manifest files and a script that deploys the application on a Minikube cluster.
+- The application **MUST** be accessible from outside the Minikube cluster.
 
+### Metrics expectation
+
+We love see as much as indicators you can expose from the application, but please don't forget those metrics as we love see below
+- Total incoming requests which are counted under 200. Similarly for 400 - 404 and 500
+- Uptime of service which is rotated after every deployment time
+
+### Logging expectation
+
+- Ideally the HTTP status codes can be filtered from HTTP access logs
+- For those manipulation requests like PUT/POST please give us a proper reason whether they are processed or not
+- Would be perfect if REQUEST ID field is appeared and searchable
+
+We currently dealing with JSON Log format everyday but feel free to choose the one you are most familiar with
+
+### Tracing expectation
+
+## Rules
 ### Instrumentation
 
 - Your application **MUST** expose metrics in Prometheus format. 
@@ -46,6 +64,4 @@ The application **MUST** be accessible from outside the Minikube cluster.
 - Your application **MUST** publish distributed tracing data in Zipkin or Jaeger format. 
 - You **SHOULD** write testable code and demonstrate unit testing it.
 - You **SHOULD** document your code and scripts.
-- You **MAY** use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run.
-
-
+- You **MAY** use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run 
