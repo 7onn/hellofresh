@@ -141,17 +141,17 @@ Response example:
 
 ### Metrics expectation
 
-We love see as much as indicators you can expose from the application, but please don't forget those metrics as we love see below
-- Total incoming requests which are counted under 200. Similarly for 400 - 404 and 500
-- Uptime of service which is rotated after every deployment time
+We love to see as much as indicators you can expose from the application, but please don't forget those metrics as we love to see below:
+- Total incoming requests are counted under 200. Similarly for 400 - 404 and 500.
+- Uptime of service which is rotated after every deployment time.
 
 ### Logging expectation
 
-- Ideally the HTTP status codes can be filtered from HTTP access logs
-- For those manipulation requests like PUT/POST please give us a proper reason whether they are processed or not
-- Would be perfect if REQUEST ID field is appeared and searchable
+- Ideally, the HTTP status codes can be filtered from HTTP access logs.
+- For those manipulation requests like PUT/POST please give us a proper reason whether they are processed or not.
+- Would be perfect if REQUEST ID field appears and searchable.
 
-We currently dealing with JSON Log format everyday but feel free to choose the one you are most familiar with
+We currently dealing with JSON Log format every day but feel free to choose the one you are most familiar with.
 
 ### Tracing expectation
 
@@ -164,4 +164,3 @@ We currently dealing with JSON Log format everyday but feel free to choose the o
 - You **SHOULD** write testable code and demonstrate unit testing it.
 - You **SHOULD** document your code and scripts.
 - You **MAY** use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run.
-
