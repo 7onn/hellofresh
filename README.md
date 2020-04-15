@@ -29,6 +29,106 @@ We believe it will take 4 to 8 hours to develop this task, however, feel free to
 
 ## Requirements
 
+### Endpoints
+
+Your application **MUST** conform to the following endpoint structure and return the HTTP status codes appropriate to each operation.
+
+Following are the endpoints that should be implemented:
+
+| Name   | Method      | URL
+| ---    | ---         | ---
+| List   | `GET`       | `/configs`
+| Create | `POST`      | `/configs`
+| Get    | `GET`       | `/configs/{name}`
+| Update | `PUT/PATCH` | `/configs/{name}`
+| Delete | `DELETE`    | `/configs/{name}`
+| Query  | `GET`       | `/search?metadata.key=value`
+
+#### Query
+
+The query endpoint **MUST** return all configs that satisfy the query argument.
+
+Query example-1:
+
+```sh
+curl http://config-service/search?metadata.monitoring.enabled=true
+```
+
+Response example:
+
+```json
+[
+  {
+    "name": "datacenter-1",
+    "metadata": {
+      "monitoring": {
+        "enabled": "true"
+      },
+      "limits": {
+        "cpu": {
+          "enabled": "false",
+          "value": "300m"
+        }
+      }
+    }
+  },
+  {
+    "name": "datacenter-2",
+    "metadata": {
+      "monitoring": {
+        "enabled": "true"
+      },
+      "limits": {
+        "cpu": {
+          "enabled": "true",
+          "value": "250m"
+        }
+      }
+    }
+  },
+]
+```
+
+
+Query example-2:
+
+```sh
+curl http://config-service/search?metadata.allergens.eggs=true
+```
+
+Response example-2:
+
+```json
+[
+  {
+    "name": "burger-nutrition",
+    "metadata": {
+      "calories": 230,
+      "fats": {
+        "saturated-fat": "0g",
+        "trans-fat": "1g"
+      },
+      "carbohydrates": {
+          "dietary-fiber": "4g",
+          "sugars": "1g"
+      },
+      "allergens": {
+        "nuts": "false",
+        "seafood": "false",
+        "eggs": "true"
+      }
+    }
+  }
+]
+```
+
+#### Schema
+
+- **Config**
+  - Name (string)
+  - Metadata (nested key:value pairs where both key and value are strings of arbitrary length)
+
+
 ### Configuration
 
 Your application **MUST** serve the API on the port defined by the environment variable `SERVE_PORT`.
@@ -41,11 +141,9 @@ The application **MUST** be accessible from outside the Minikube cluster.
 
 ### Instrumentation
 
-- Your application **MUST** expose metrics in Prometheus format. 
-- Your application **MUST** print structured logs in JSON format to stdout. 
-- Your application **MUST** publish distributed tracing data in Zipkin or Jaeger format. 
+- Your application **MUST** expose metrics in Prometheus format.
+- Your application **MUST** print structured logs in JSON format to stdout.
+- Your application **MUST** publish distributed tracing data in Zipkin or Jaeger format.
 - You **SHOULD** write testable code and demonstrate unit testing it.
 - You **SHOULD** document your code and scripts.
 - You **MAY** use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run.
-
-
