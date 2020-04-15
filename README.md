@@ -155,6 +155,11 @@ We currently dealing with JSON Log format every day but feel free to choose the 
 
 ### Tracing expectation
 
+- We should see a waterfall flow, with spans for your requests, every middleware should be wrapped in spam.
+- Make sure to check if the span it's a child span or if it needs to start a root span.
+- If you're using a data structure store, memory-caching solution or a database(MySQL, PostgreSQL, MongoDB, etc), make sure to show your queries.
+- Add tags and annotations, if it needs.
+
 ## Rules
 ### Instrumentation
 
