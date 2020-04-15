@@ -1,5 +1,3 @@
-# WORK IN PROGRESS #
-
 ## HelloFresh Site Reliability Engineer Test
 
 Hello and thanks for taking the time to try this out.
@@ -138,28 +136,6 @@ Response example:
 
 - The application **MUST** be deployable on a Kubernetes cluster. Please provide manifest files and a script that deploys the application on a Minikube cluster.
 - The application **MUST** be accessible from outside the Minikube cluster.
-
-### Metrics expectation
-
-We would love to see as many indicators you can expose from the application as you see fit, but please don't forget to include the metrics below:
-
-- Total incoming requests are counted in groups of HTTP response codes 200, 400 - 404 and 500.
-- Uptime of service which is rotated after every deployment.
-
-### Logging expectation
-
-- Ideally, the HTTP status codes can be filtered from HTTP access logs.
-- For manipulation requests like PUT/POST please give us a proper status whether they are processed or not.
-- Would be perfect if REQUEST ID field will be presented and be searchable.
-
-We work with JSON Log format in our day to day, but feel free to choose the one you are most familiar with.
-
-### Tracing expectation
-
-- We should see a waterfall flow, with spans for your requests, every middleware should be wrapped in a span.
-- Create a root span if the tracing context is empty
-- If you're using a data structure store, memory-caching solution or a database(MySQL, PostgreSQL, MongoDB, etc), make sure to show your queries.
-- Add tags and annotations, if needed.
 
 ## Rules
 ### Instrumentation
