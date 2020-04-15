@@ -42,16 +42,15 @@ Following are the endpoints that should be implemented:
 | Get    | `GET`       | `/configs/{name}`
 | Update | `PUT/PATCH` | `/configs/{name}`
 | Delete | `DELETE`    | `/configs/{name}`
-| Query  | `GET`       | `/search?metadata.key=value`
 
-#### Query
+#### List
 
-The query endpoint **MUST** return all configs that satisfy the query argument.
+The list endpoint **MUST** return all configs.
 
-Query example-1:
+List example-1:
 
 ```sh
-curl http://config-service/search?metadata.monitoring.enabled=true
+curl http://config-service/configs
 ```
 
 Response example:
@@ -90,13 +89,13 @@ Response example:
 ```
 
 
-Query example-2:
+Get example:
 
 ```sh
-curl http://config-service/search?metadata.allergens.eggs=true
+curl http://config-service/configs/burger-nutrition
 ```
 
-Response example-2:
+Response example:
 
 ```json
 [
