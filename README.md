@@ -57,7 +57,6 @@ We currently dealing with JSON Log format everyday but feel free to choose the o
 ### Tracing expectation
 
 ## Rules
-=======
 ### Instrumentation
 
 - Your application **MUST** expose metrics in Prometheus format. 
@@ -65,3 +64,4 @@ We currently dealing with JSON Log format everyday but feel free to choose the o
 - Your application **MUST** publish distributed tracing data in Zipkin or Jaeger format. 
 - You **SHOULD** write testable code and demonstrate unit testing it.
 - You **SHOULD** document your code and scripts.
+- You **MAY** use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run 
