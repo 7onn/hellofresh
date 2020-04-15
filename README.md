@@ -143,8 +143,8 @@ Response example:
 
 We would love to see as many indicators you can expose from the application as you see fit, but please don't forget to include the metrics below:
 
-Total incoming requests are counted in groups of HTTP response codes 200, 400 - 404 and 500.
-Uptime of service which is rotated after every deployment.
+- Total incoming requests are counted in groups of HTTP response codes 200, 400 - 404 and 500.
+- Uptime of service which is rotated after every deployment.
 
 ### Logging expectation
 
