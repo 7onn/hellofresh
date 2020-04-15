@@ -4,7 +4,7 @@
 
 Hello and thanks for taking the time to try this out.
 
-The goal of this test is to assert (to some degree) your coding, testing, automation and documentation skills. You're given a simple problem, so you can focus on showcasing your techniques.
+The goal of this test is to assess (to some degree) your coding, testing, automation, and documentation skills. You're given a simple problem, so you can focus on showcasing your techniques.
 
 ## Problem definition
 The test aims to create a simple HTTP service that provides observability aspects, (e.g) you can store and returns random values, collect metrics from operations, add logs and tracing for requests.  
