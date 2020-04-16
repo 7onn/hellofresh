@@ -1,30 +1,29 @@
 ## HelloFresh Site Reliability Engineer Test
 
-Hello and thanks for taking the time to try this out.
+Hello and thank you for your time.
 
-The goal of this test is to assess (to some degree) your coding, testing, automation, and documentation skills. You're given a simple problem, so you can focus on showcasing your techniques.
+The goal of this test is to assess your coding, testing, automation, and documentation skills. You're given a simple problem so that you can focus on showcasing your techniques.
 
 ## Problem definition
 
-The test aims to create a simple HTTP API service using the language of your choice (we prefer Python or GoLang) that provides observability aspects, collect metrics from operations, add logs and tracing for HTTP requests.
+We would like you to create a simple HTTP API service using the language of your choice (Python or GoLang are preferred but not required) that provides observability aspects, collects metrics from operations, and adds logs and tracing for HTTP requests.
 
-Since we love automating things; the service should be automatically deployed to Kubernetes.
+Since we love automating things, the service should be automatically deployed to Kubernetes.
 
-_Note: While we love open source here at HelloFresh, please do not create a public repo with your test in! This challenge is only shared with people interviewing, and for obvious reasons, we'd like it to remain this way._
+_Note: While we love open source here at HelloFresh, please do not create a public repo for your test! This challenge is only shared with people interviewing, and for obvious reasons, we'd like it to remain this way._
 
 ## Instructions
 
 1. Clone this repository.
 2. Create a new `dev` branch.
-3. Solve the task and commit your code. Commit often, we like to see small commits that build-up to the result of your test, instead of one final commit with all the code.
+3. Solve the task and commit your code. Commit often; we like to see small commits that build-up to the result of your test, instead of one final commit with all the code.
 4. Do a pull request from the `dev` branch to the `master` branch. More on that right below.
 5. Reply to the thread you are having with our HR department so we can start reviewing your code.
 
 In your pull request, make sure to write about your approach in the description. One or more of our engineers will then perform a code review.
-We will ask questions which we expect you to be able to answer. Code review is an important part of our process;
-this gives you as well as us a better understanding of what working together might be like.
+We will ask questions which we expect you to be able to answer. Code review is an important part of our process; this gives you as well as us a better understanding of what working together might be like.
 
-We believe it will take 4 to 8 hours to develop this task, however, feel free to invest as much time as you want.
+We believe it will take 4 to 8 hours to develop this task; however, feel free to invest as much time as you would like.
 
 ## Requirements
 
@@ -32,7 +31,7 @@ We believe it will take 4 to 8 hours to develop this task, however, feel free to
 
 Your application **MUST** conform to the following endpoint structure and return the HTTP status codes appropriate to each operation.
 
-Following are the endpoints that should be implemented:
+The following endpoints should be implemented:
 
 | Name   | Method      | URL
 | ---    | ---         | ---
@@ -46,7 +45,7 @@ Following are the endpoints that should be implemented:
 
 The list endpoint **MUST** return all configs.
 
-List example-1:
+List example:
 
 ```sh
 curl http://config-service/configs
@@ -123,8 +122,8 @@ Response example:
 #### Schema
 
 - **Config**
-  - Name (string)
-  - Metadata (nested key:value pairs where both key and value are strings of arbitrary length)
+  - Name (string).
+  - Metadata (nested key:value pairs where both key and value are strings of arbitrary length).
 
 
 ### Configuration
@@ -145,4 +144,4 @@ Response example:
 - Your application **MUST** publish distributed tracing data in Zipkin or Jaeger format.
 - You **SHOULD** write testable code and demonstrate unit testing it.
 - You **SHOULD** document your code and scripts.
-- You **MAY** use any testing, mocking libraries provided that you state the reasoning and it's simple to install and run.
+- You **MAY** use any testing, mocking libraries provided that you state the reasoning and they are simple to install and run.
