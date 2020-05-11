@@ -6,7 +6,7 @@ The goal of this test is to assess your coding, testing, automation, and documen
 
 ## Problem definition
 
-We would like you to create a simple HTTP API service using the language of your choice (Python or GoLang are preferred but not required) that provides observability aspects, collects metrics from operations, and adds logs and tracing for HTTP requests.
+We would like you to create a simple HTTP API service using Python or GoLang, that provides observability aspects, collects metrics from operations, and adds logs and tracing for HTTP requests.
 
 Since we love automating things, the service should be automatically deployed to Kubernetes.
 
