@@ -1,4 +1,4 @@
-module echotom.dev/main/v1
+module echotom.dev/hellofresh
 
 go 1.14
 

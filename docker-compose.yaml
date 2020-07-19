@@ -1,0 +1,19 @@
+version: "3.8"
+services:  
+  database:
+    image: mongo:4.4.0-rc13
+    container_name: hellofresh-database
+    ports:
+      - "27017:27017"
+  server:
+    image: hellofresh-server:latest
+    depends_on: 
+      - database
+    build:
+      context: ./challenge/app/
+    container_name: hellofresh-server
+    environment:
+      SERVE_PORT: 3000
+      DATABASE_URL: "hellofresh-database:27017/hellofresh"
+    ports:
+      - "3000:3000"
