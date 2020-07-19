@@ -50,7 +50,7 @@ func TestUpdateDataCenter(t *testing.T) {
 	}
 }
 func TestDeleteDataCenter(t *testing.T) {
-	d := DeleteDataCenter(dcMock)
+	d := DeleteDataCenter(dcMock.Name)
 	if !d {
 		t.Errorf("Expected truthy deletion but got false")
 	}

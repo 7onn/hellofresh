@@ -67,7 +67,7 @@ func TestUpdateMeal(t *testing.T) {
 	}
 }
 func TestDeleteMeal(t *testing.T) {
-	d := DeleteMeal(mealMock)
+	d := DeleteMeal(mealMock.Name)
 	if !d {
 		t.Errorf("Expected truthy deletion but got false")
 	}

@@ -46,7 +46,11 @@ func UpdateDataCenter(dc *DataCenter) *DataCenter {
 }
 
 //DeleteDataCenter is for removing an existing data center
-func DeleteDataCenter(dc *DataCenter) bool {
-	db.Collection(dataCenterCollection).DeleteDocument(dc)
+func DeleteDataCenter(n string) bool {
+	dc := GetDataCenterByName(n)
+	if dc.Name == "" {
+		return false
+	}
+	db.Collection(dataCenterCollection).DeleteDocument(&dc)
 	return true
 }

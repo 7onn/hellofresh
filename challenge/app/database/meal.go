@@ -46,7 +46,11 @@ func UpdateMeal(m *Meal) *Meal {
 }
 
 //DeleteMeal is for removing an existing meal
-func DeleteMeal(m *Meal) bool {
-	db.Collection(mealCollection).DeleteDocument(m)
+func DeleteMeal(n string) bool {
+	m := GetMealByName(n)
+	if m.Name == "" {
+		return false
+	}
+	db.Collection(mealCollection).DeleteDocument(&m)
 	return true
 }
