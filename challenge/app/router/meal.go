@@ -2,7 +2,6 @@ package router
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 
@@ -22,18 +21,23 @@ func getMealByNameHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if m.Name == "" {
+		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode(fmtResponse(n + " not found"))
+		return
+	}
+
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(m)
 }
 
-func createMealHandler(w http.ResponseWriter, r *http.Request) {
+func addMealHandler(w http.ResponseWriter, r *http.Request) {
 	payload, _ := ioutil.ReadAll(r.Body)
 	m := database.Meal{}
 
 	err := json.Unmarshal([]byte(payload), &m)
 
 	if err != nil {
-		fmt.Println(err, string(payload))
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(fmtResponse(err.Error()))
 		return
@@ -42,7 +46,6 @@ func createMealHandler(w http.ResponseWriter, r *http.Request) {
 	_, err = database.AddMeal(&m)
 
 	if err != nil {
-		fmt.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(fmtResponse(err.Error()))
 		return
@@ -98,5 +101,5 @@ func deleteMealHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(fmtResponse(err.Error()))
+	json.NewEncoder(w).Encode(fmtResponse(n + " was successfuly deleted"))
 }

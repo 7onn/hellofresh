@@ -2,7 +2,6 @@ package router
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 
@@ -11,6 +10,11 @@ import (
 
 func getAllDataCentersHandler(w http.ResponseWriter, r *http.Request) {
 	dcs := database.GetAllDataCenters()
+	if len(dcs) < 1 {
+		json.NewEncoder(w).Encode(make([]string, 0))
+		return
+	}
+
 	json.NewEncoder(w).Encode(dcs)
 }
 
@@ -19,7 +23,6 @@ func addDataCenterHandler(w http.ResponseWriter, r *http.Request) {
 	dc := database.DataCenter{}
 	err := json.Unmarshal([]byte(payload), &dc)
 	if err != nil {
-		fmt.Println(err, string(payload))
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(err.Error()))
 		return
@@ -27,7 +30,6 @@ func addDataCenterHandler(w http.ResponseWriter, r *http.Request) {
 
 	_, err = database.AddDataCenter(&dc)
 	if err != nil {
-		fmt.Println(err)
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return

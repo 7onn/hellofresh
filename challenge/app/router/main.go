@@ -25,7 +25,7 @@ func Handlers() *mux.Router {
 	r.HandleFunc("/configs", getAllDataCentersHandler).Methods("GET")
 	r.HandleFunc("/configs", addDataCenterHandler).Methods("POST")
 	r.HandleFunc("/configs/{name}", getMealByNameHandler).Methods("GET")
-	r.HandleFunc("/configs/{name}", createMealHandler).Methods("PUT")
+	r.HandleFunc("/configs/{name}", addMealHandler).Methods("PUT")
 	r.HandleFunc("/configs/{name}", updateMealHandler).Methods("PATCH")
 	r.HandleFunc("/configs/{name}", deleteMealHandler).Methods("DELETE")
 
