@@ -37,21 +37,31 @@ func TestGetAllDataCenters(t *testing.T) {
 	}
 }
 func TestGetDataCenterByName(t *testing.T) {
-	dc := GetDataCenterByName(dataCenterName)
+	dc, err := GetDataCenterByName(dataCenterName)
+
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
 	if dc.GetId() == "" {
 		t.Errorf("Expected 'test center' to return but got empty record")
 	}
 }
 func TestUpdateDataCenter(t *testing.T) {
 	dcMock.Name = "tested center"
-	dc := UpdateDataCenter(dcMock)
+	dc, err := UpdateDataCenter(dcMock)
+
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
 	if dc.Name != "tested center" {
 		t.Errorf("Expected 'tested center' to return but got out-of-date record")
 	}
 }
 func TestDeleteDataCenter(t *testing.T) {
-	d := DeleteDataCenter(dcMock.Name)
-	if !d {
-		t.Errorf("Expected truthy deletion but got false")
+	err := DeleteDataCenter(dcMock.Name)
+	if err != nil {
+		t.Errorf("Expected 'tested center' deletion but got error instead")
 	}
 }

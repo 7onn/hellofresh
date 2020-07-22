@@ -22,35 +22,51 @@ func GetAllDataCenters() []DataCenter {
 }
 
 //GetDataCenterByName is for filtering one data center by its name field
-func GetDataCenterByName(n string) DataCenter {
+func GetDataCenterByName(n string) (DataCenter, error) {
 	var dc DataCenter
-	db.Collection(dataCenterCollection).FindOne(bson.M{"name": n}, &dc)
-	return dc
+	err := db.Collection(dataCenterCollection).FindOne(bson.M{"name": n}, &dc)
+
+	if err != nil {
+		return DataCenter{}, err
+	}
+
+	return dc, nil
 }
 
 //AddDataCenter is for signing up a new data center
 func AddDataCenter(dc *DataCenter) (DataCenter, error) {
-	existent := GetDataCenterByName(dc.Name)
+	existent, _ := GetDataCenterByName(dc.Name)
 	if existent.Name != "" {
 		return existent, errors.New(dc.Name + " already exists")
 	}
 
-	db.Collection(dataCenterCollection).Save(dc)
-	return GetDataCenterByName(dc.Name), nil
+	err := db.Collection(dataCenterCollection).Save(dc)
+
+	if err != nil {
+		return *dc, err
+	}
+
+	return GetDataCenterByName(dc.Name)
 }
 
 //UpdateDataCenter is for patching an existing data center
-func UpdateDataCenter(dc *DataCenter) *DataCenter {
-	db.Collection(dataCenterCollection).Save(dc)
-	return dc
+func UpdateDataCenter(dc *DataCenter) (*DataCenter, error) {
+	err := db.Collection(dataCenterCollection).Save(dc)
+
+	if err != nil {
+		return dc, err
+	}
+
+	return dc, nil
 }
 
 //DeleteDataCenter is for removing an existing data center
-func DeleteDataCenter(n string) bool {
-	dc := GetDataCenterByName(n)
+func DeleteDataCenter(n string) error {
+	dc, _ := GetDataCenterByName(n)
+
 	if dc.Name == "" {
-		return false
+		return errors.New(n + " does not exists")
 	}
-	db.Collection(dataCenterCollection).DeleteDocument(&dc)
-	return true
+
+	return db.Collection(dataCenterCollection).DeleteDocument(&dc)
 }

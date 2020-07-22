@@ -54,21 +54,31 @@ func TestGetAllMeals(t *testing.T) {
 	}
 }
 func TestGetMealByName(t *testing.T) {
-	m := GetMealByName(mealName)
+	m, err := GetMealByName(mealName)
+
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
 	if m.GetId() == "" {
 		t.Errorf("Expected 'test meal' to return but got empty record")
 	}
 }
 func TestUpdateMeal(t *testing.T) {
 	mealMock.Name = "tested meal"
-	m := UpdateMeal(mealMock)
+	m, err := UpdateMeal(mealMock)
+
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
 	if m.Name != "tested meal" {
 		t.Errorf("Expected 'tested meal' to return but got out-of-date record")
 	}
 }
 func TestDeleteMeal(t *testing.T) {
-	d := DeleteMeal(mealMock.Name)
-	if !d {
+	err := DeleteMeal(mealMock.Name)
+	if err != nil {
 		t.Errorf("Expected truthy deletion but got false")
 	}
 }

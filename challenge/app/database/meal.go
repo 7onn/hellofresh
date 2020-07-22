@@ -22,35 +22,49 @@ func GetAllMeals() []Meal {
 }
 
 //GetMealByName is for filtering one meal by its name field
-func GetMealByName(n string) Meal {
+func GetMealByName(n string) (Meal, error) {
 	var m Meal
-	db.Collection(mealCollection).FindOne(bson.M{"name": n}, &m)
-	return m
+	err := db.Collection(mealCollection).FindOne(bson.M{"name": n}, &m)
+	if err != nil {
+		return m, err
+	}
+	return m, nil
 }
 
 //AddMeal is for signing up a new meal
 func AddMeal(m *Meal) (Meal, error) {
-	existent := GetMealByName(m.Name)
+	existent, _ := GetMealByName(m.Name)
+
 	if existent.Name != "" {
 		return existent, errors.New(m.Name + " already exists")
 	}
 
-	db.Collection(mealCollection).Save(m)
-	return GetMealByName(m.Name), nil
+	err := db.Collection(mealCollection).Save(m)
+	if err != nil {
+		return *m, err
+	}
+
+	return GetMealByName(m.Name)
 }
 
 //UpdateMeal is for patching an existing meal
-func UpdateMeal(m *Meal) *Meal {
-	db.Collection(mealCollection).Save(m)
-	return m
+func UpdateMeal(m *Meal) (*Meal, error) {
+	err := db.Collection(mealCollection).Save(m)
+
+	if err != nil {
+		return m, err
+	}
+
+	return m, nil
 }
 
 //DeleteMeal is for removing an existing meal
-func DeleteMeal(n string) bool {
-	m := GetMealByName(n)
+func DeleteMeal(n string) error {
+	m, _ := GetMealByName(n)
+
 	if m.Name == "" {
-		return false
+		return errors.New(n + " does not exists")
 	}
-	db.Collection(mealCollection).DeleteDocument(&m)
-	return true
+
+	return db.Collection(mealCollection).DeleteDocument(&m)
 }
