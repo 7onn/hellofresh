@@ -6,31 +6,31 @@ import (
 
 //CPU for Limits type
 type CPU struct {
-	Enabled bool
-	Value   string
+	Enabled bool   `json:"enabled"`
+	Value   string `json:"value"`
 }
 
 //Limits for DataCenterMetadata type
 type Limits struct {
-	CPU CPU
+	CPU CPU `json:"cpu"`
 }
 
 //Monitoring for DataCenterMetadata type
 type Monitoring struct {
-	Enabled bool
+	Enabled bool `json:"enabled"`
 }
 
 //DataCenterMetadata for DataCenter type
 type DataCenterMetadata struct {
-	Monitoring Monitoring
-	Limits     Limits
+	Monitoring Monitoring `json:"monitoring"`
+	Limits     Limits     `json:"limits"`
 }
 
 //DataCenter ... what you think it is, linter?
 type DataCenter struct {
 	bongo.DocumentBase `bson:",inline"`
-	Name               string
-	Metadata           DataCenterMetadata
+	Name               string             `json:"name"`
+	Metadata           DataCenterMetadata `json:"metadata"`
 }
 
 // {
@@ -50,17 +50,17 @@ type DataCenter struct {
 
 //MealMetadata for Meal type
 type MealMetadata struct {
-	Calories      int
-	Fats          map[string]string
-	Carbohydrates map[string]string
-	Allergens     map[string]bool
+	Calories      int               `json:"calories"`
+	Fats          map[string]string `json:"fats"`
+	Carbohydrates map[string]string `json:"carbohydrates"`
+	Allergens     map[string]bool   `json:"allergens"`
 }
 
 //Meal ... what you think it is, linter?
 type Meal struct {
 	bongo.DocumentBase `bson:",inline"`
-	Name               string
-	Metadata           MealMetadata
+	Name               string       `json:"name"`
+	Metadata           MealMetadata `json:"metadata"`
 }
 
 // {
