@@ -2,6 +2,7 @@ package database
 
 import (
 	"errors"
+	"strings"
 
 	"github.com/globalsign/mgo/bson"
 )
@@ -25,7 +26,8 @@ func GetAllMeals() []Meal {
 func GetMealByName(n string) (Meal, error) {
 	var m Meal
 	err := db.Collection(mealCollection).FindOne(bson.M{"name": n}, &m)
-	if err != nil {
+
+	if err != nil && !strings.Contains(err.Error(), "not found") {
 		return m, err
 	}
 	return m, nil
@@ -48,14 +50,8 @@ func AddMeal(m *Meal) (Meal, error) {
 }
 
 //UpdateMeal is for patching an existing meal
-func UpdateMeal(m *Meal) (*Meal, error) {
-	err := db.Collection(mealCollection).Save(m)
-
-	if err != nil {
-		return m, err
-	}
-
-	return m, nil
+func UpdateMeal(m *Meal) error {
+	return db.Collection(mealCollection).Save(m)
 }
 
 //DeleteMeal is for removing an existing meal

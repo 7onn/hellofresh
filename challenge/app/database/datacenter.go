@@ -50,14 +50,8 @@ func AddDataCenter(dc *DataCenter) (DataCenter, error) {
 }
 
 //UpdateDataCenter is for patching an existing data center
-func UpdateDataCenter(dc *DataCenter) (*DataCenter, error) {
-	err := db.Collection(dataCenterCollection).Save(dc)
-
-	if err != nil {
-		return dc, err
-	}
-
-	return dc, nil
+func UpdateDataCenter(dc *DataCenter) error {
+	return db.Collection(dataCenterCollection).Save(dc)
 }
 
 //DeleteDataCenter is for removing an existing data center

@@ -66,13 +66,13 @@ func TestGetMealByName(t *testing.T) {
 }
 func TestUpdateMeal(t *testing.T) {
 	mealMock.Name = "tested meal"
-	m, err := UpdateMeal(mealMock)
+	err := UpdateMeal(mealMock)
 
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 
-	if m.Name != "tested meal" {
+	if mealMock.Name != "tested meal" {
 		t.Errorf("Expected 'tested meal' to return but got out-of-date record")
 	}
 }

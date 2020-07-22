@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-const dataCenterName = "test center"
+const dataCenterName = "testCenter"
 
 var dcMock = &DataCenter{
 	Name: dataCenterName,
@@ -48,20 +48,20 @@ func TestGetDataCenterByName(t *testing.T) {
 	}
 }
 func TestUpdateDataCenter(t *testing.T) {
-	dcMock.Name = "tested center"
-	dc, err := UpdateDataCenter(dcMock)
+	dcMock.Name = "testedCenter"
+	err := UpdateDataCenter(dcMock)
 
 	if err != nil {
 		t.Errorf(err.Error())
 	}
 
-	if dc.Name != "tested center" {
+	if dcMock.Name != "testedCenter" {
 		t.Errorf("Expected 'tested center' to return but got out-of-date record")
 	}
 }
 func TestDeleteDataCenter(t *testing.T) {
 	err := DeleteDataCenter(dcMock.Name)
 	if err != nil {
-		t.Errorf("Expected 'tested center' deletion but got error instead")
+		t.Errorf("Expected 'testedCenter' deletion but got error instead")
 	}
 }
