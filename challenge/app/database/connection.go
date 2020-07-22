@@ -1,7 +1,6 @@
 package database
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/go-bongo/bongo"
@@ -24,7 +23,6 @@ func connect() *bongo.Connection {
 	db, err := bongo.Connect(config)
 
 	if err != nil {
-		fmt.Println(err)
 		panic("failed to connect database")
 	}
 
