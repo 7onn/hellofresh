@@ -1,0 +1,15 @@
+replicaCount: 1
+image:
+  repository: hellofresh-database
+  tag: latest # this should be the commit SHA of a wishful release
+  pullPolicy: Never
+service:
+  type: ClusterIP
+  port: 27017
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 500m
+    memory: 512Mi
