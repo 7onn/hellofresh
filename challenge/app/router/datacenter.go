@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"echotom.dev/hellofresh/database"
+	"echotom.dev/hellofresh/logger"
 )
 
 func getAllDataCentersHandler(w http.ResponseWriter, r *http.Request) {
@@ -23,6 +24,7 @@ func addDataCenterHandler(w http.ResponseWriter, r *http.Request) {
 	dc := database.DataCenter{}
 	err := json.Unmarshal([]byte(payload), &dc)
 	if err != nil {
+		logger.Err(err.Error())
 		w.WriteHeader(http.StatusBadRequest)
 		w.Write([]byte(err.Error()))
 		return
@@ -30,6 +32,7 @@ func addDataCenterHandler(w http.ResponseWriter, r *http.Request) {
 
 	_, err = database.AddDataCenter(&dc)
 	if err != nil {
+		logger.Err(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))
 		return

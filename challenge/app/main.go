@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"regexp"
 
+	"echotom.dev/hellofresh/logger"
 	"echotom.dev/hellofresh/router"
 	"github.com/joho/godotenv"
 )
@@ -19,7 +19,7 @@ func main() {
 	if validPort {
 		log.Fatal(http.ListenAndServe(":"+p, router.Handlers()))
 	} else {
-		fmt.Println("Invalid port number:", p)
+		logger.Err("Invalid port number: " + p)
 		os.Exit(1)
 	}
 }

@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"strings"
 
 	"echotom.dev/hellofresh/database"
+	"echotom.dev/hellofresh/logger"
 
 	"github.com/gorilla/mux"
 )
@@ -16,6 +18,7 @@ func getMealByNameHandler(w http.ResponseWriter, r *http.Request) {
 	m, err := database.GetMealByName(n)
 
 	if err != nil {
+		logger.Err(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(fmtResponse(err.Error()))
 		return
@@ -38,6 +41,7 @@ func addMealHandler(w http.ResponseWriter, r *http.Request) {
 	err := json.Unmarshal([]byte(payload), &m)
 
 	if err != nil {
+		logger.Err(err.Error())
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(fmtResponse(err.Error()))
 		return
@@ -46,6 +50,7 @@ func addMealHandler(w http.ResponseWriter, r *http.Request) {
 	_, err = database.AddMeal(&m)
 
 	if err != nil {
+		logger.Err(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(fmtResponse(err.Error()))
 		return
@@ -61,13 +66,14 @@ func updateMealHandler(w http.ResponseWriter, r *http.Request) {
 	m, err := database.GetMealByName(n)
 
 	if err != nil {
+		logger.Err(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(fmtResponse(err.Error()))
 		return
 	}
 
 	if m.Name == "" {
-		w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusNotFound)
 		json.NewEncoder(w).Encode(fmtResponse(n + " not found"))
 		return
 	}
@@ -77,6 +83,7 @@ func updateMealHandler(w http.ResponseWriter, r *http.Request) {
 	err = json.Unmarshal([]byte(payload), &updt)
 
 	if err != nil {
+		logger.Err(err.Error())
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(fmtResponse(err.Error()))
 		return
@@ -84,7 +91,15 @@ func updateMealHandler(w http.ResponseWriter, r *http.Request) {
 
 	m.Name = updt.Name
 	m.Metadata = updt.Metadata
-	database.UpdateMeal(&m)
+	err = database.UpdateMeal(&m)
+
+	if err != nil {
+		logger.Err(err.Error())
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(fmtResponse(err.Error()))
+		return
+	}
+
 	json.NewEncoder(w).Encode(m)
 }
 
@@ -95,7 +110,13 @@ func deleteMealHandler(w http.ResponseWriter, r *http.Request) {
 	err := database.DeleteMeal(n)
 
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
+		if strings.Contains(err.Error(), "not exists") {
+			w.WriteHeader(http.StatusNotFound)
+			json.NewEncoder(w).Encode(fmtResponse(err.Error()))
+			return
+		}
+		logger.Err(err.Error())
+		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(fmtResponse(err.Error()))
 		return
 	}
