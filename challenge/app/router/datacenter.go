@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"strings"
 
 	"echotom.dev/hellofresh/database"
 	"echotom.dev/hellofresh/logger"
@@ -26,15 +27,20 @@ func addDataCenterHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		logger.Err(err.Error())
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(err.Error()))
+		json.NewEncoder(w).Encode(fmtResponse(err.Error()))
 		return
 	}
 
 	_, err = database.AddDataCenter(&dc)
 	if err != nil {
+		if strings.Contains(err.Error(), "already exists") {
+			w.WriteHeader(http.StatusAlreadyReported)
+			json.NewEncoder(w).Encode(fmtResponse(err.Error()))
+			return
+		}
 		logger.Err(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		json.NewEncoder(w).Encode(fmtResponse(err.Error()))
 		return
 	}
 
