@@ -1,7 +1,9 @@
 version: "3.8"
 services:  
   database:
-    image: mongo:4.4.0-rc13
+    image: hellofresh-database:latest
+    build:
+      context: ./challenge/database/
     container_name: hellofresh-database
     ports:
       - "27017:27017"
