@@ -1,6 +1,8 @@
 package router
 
 import (
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
@@ -21,7 +23,7 @@ func Handlers() *mux.Router {
 	r.Use(jsonMiddleware)
 	r.Use(prometheusMiddleware)
 	r.Path("/metrics").Handler(promhttp.Handler())
-
+	r.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) { w.WriteHeader(http.StatusOK) })
 	r.HandleFunc("/configs", getAllDataCentersHandler).Methods("GET")
 	r.HandleFunc("/configs", addDataCenterHandler).Methods("POST")
 	r.HandleFunc("/configs/{name}", getMealByNameHandler).Methods("GET")
