@@ -50,6 +50,11 @@ func addMealHandler(w http.ResponseWriter, r *http.Request) {
 	_, err = database.AddMeal(&m)
 
 	if err != nil {
+		if strings.Contains(err.Error(), "already exists") {
+			w.WriteHeader(http.StatusAlreadyReported)
+			json.NewEncoder(w).Encode(fmtResponse(err.Error()))
+			return
+		}
 		logger.Err(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(fmtResponse(err.Error()))
