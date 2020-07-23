@@ -8,7 +8,7 @@ import (
 )
 
 type customOutput struct {
-	Msg string
+	Msg string `json:"msg"`
 }
 
 //Err is fot printing at stderr
