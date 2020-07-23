@@ -2,7 +2,7 @@
 {{- $fullName := include "hellofresh-server.fullname" . -}}
 {{- $path := .Values.ingress.path | default "/" -}}
 {{- $port := .Values.service.port | default 32080 -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
