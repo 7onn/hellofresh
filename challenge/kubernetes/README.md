@@ -32,8 +32,8 @@ make add-server
 ```
 
 #### jaeger
-It was quite troublesome to implement it locally on a dual core with 8Gb of RAM =(
-then I gave up this step; holefully the whole documentation and scripts will be enough for this challenge assessment
+even patching the cassandra statefulset replicas to 1 instance, it was quite troublesome to implement it locally on a dual core with 8Gb of RAM
+then I gave up this step; hopefully the whole documentation and scripts will be enough for this challenge assessment
 
 
 #### after install
