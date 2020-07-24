@@ -14,7 +14,7 @@ help:
 	@echo "  - rm-production (i.e: remove production namespace and it's content)"
 	@echo
 	@echo
-	@echo "note: you also might use add scripts to update charts"
+	@echo "note: you also might use 'add' scripts to update database and server charts"
 	@echo
 
 add-namespace:
@@ -48,4 +48,4 @@ add-production: add-namespace add-database add-server
 	@kubectl -n production get pods
 
 .PHONY: rm-production
-rm-production: rm-server rm-namespace
+rm-production: rm-server rm-database rm-namespace
