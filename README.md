@@ -1,5 +1,5 @@
 # Description
-this project is meant to accomplish the HelloFresh's SRE challenge
+this project is meant to accomplish the HelloFresh's SRE challenge; failed btw hahahaha but the code is there
 
 #### my setup
 - Darwin OS 10.15.5
